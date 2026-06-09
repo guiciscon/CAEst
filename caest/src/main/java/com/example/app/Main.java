@@ -1,11 +1,9 @@
 package com.example.app;
 
-import com.example.util.ConnectionFactory;
 import com.example.model.Motorista;
 import com.example.dao.MotoristaDAO;
 import com.example.dao.VeiculoDAO;
 import com.example.model.Veiculo;
-import java.sql.Connection;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,7 +18,7 @@ public class Main {
         //motoristaDAO.inserirMotorista(motorista);
         //motoristaDAO.deletarMotorista(4);
         //motoristaDAO.atualizarMotorista(motorista);
-        //motoristaDAO.listarMotoristas();
+        motoristaDAO.listarMotoristas();
 
         Veiculo veiculo = new Veiculo();
         veiculo.setId(2);
@@ -35,6 +33,5 @@ public class Main {
         //veiculoDAO.atualizarVeiculo(veiculo);
         veiculoDAO.listarVeiculos();
         
-
     }
 }

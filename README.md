@@ -24,3 +24,7 @@ CREATE TABLE LiberacaoManual(
     dataHora DATETIME NOT NULL,
     idVeiculo INT NOT NULL,
     FOREIGN KEY (idVeiculo) REFERENCES Veiculo(id));
+
+
+
+caso a imagem bugue entre no HomeView.fxml e mude a linha 15 para: <Image url="@imagens/CAEst_logo.png" />
