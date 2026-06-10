@@ -4,6 +4,8 @@ import com.example.util.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MotoristaDAO {
     public void inserirMotorista(Motorista motorista){
@@ -59,25 +61,36 @@ public class MotoristaDAO {
         }
     }
 
-    public void listarMotoristas(){
-        String sql = "SELECT * FROM motorista";
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public List<Motorista> listarMotoristas(){
 
-            var rs = stmt.executeQuery();
+    List<Motorista> motoristas = new ArrayList<>();
 
-            while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id"));
-                System.out.println("Nome: " + rs.getString("nome"));
-                System.out.println("CPF: " + rs.getString("cpf"));
-                System.out.println("Matrícula: " + rs.getString("matricula"));
-                System.out.println("Vínculo: " + rs.getString("vinculo"));
-                System.out.println("---------------------------");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    String sql = "SELECT * FROM motorista";
+
+    try (Connection conn = ConnectionFactory.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        var rs = stmt.executeQuery();
+
+        while (rs.next()) {
+
+            Motorista motorista = new Motorista();
+
+            motorista.setId(rs.getInt("id"));
+            motorista.setNome(rs.getString("nome"));
+            motorista.setCpf(rs.getString("cpf"));
+            motorista.setMatricula(rs.getString("matricula"));
+            motorista.setVinculo(rs.getString("vinculo"));
+
+            motoristas.add(motorista);
         }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return motoristas;
+}
 
     public void buscarMotoristaPorId(int id){
         String sql = "SELECT * FROM motorista WHERE id = ?";

@@ -6,22 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
-
     @Override
     public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader =
+                new FXMLLoader(App.class.getResource("/view/HomeView.fxml"));
 
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/view/HomeView.fxml")
-        );
-
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(fxmlLoader.load());
 
         stage.setTitle("CAEst");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
