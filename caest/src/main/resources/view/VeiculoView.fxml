@@ -8,32 +8,40 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.VeiculoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.VeiculoController">
    <children>
-      <Button layoutX="38.0" layoutY="477.0" mnemonicParsing="false" text="Salvar" />
-      <Button layoutX="116.0" layoutY="477.0" mnemonicParsing="false" text="Limpar" />
-      <Button layoutX="199.0" layoutY="477.0" mnemonicParsing="false" text="Excluir" />
+      <Button layoutX="38.0" layoutY="477.0" mnemonicParsing="false" onAction="#salvarVeiculo" text="Salvar" />
+      <Button layoutX="180.0" layoutY="477.0" mnemonicParsing="false" onAction="#limparCampos" text="Limpar" />
+      <Button layoutX="254.0" layoutY="477.0" mnemonicParsing="false" onAction="#excluirVeiculo" text="Excluir" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltarHome" text="Voltar" />
-      <TextField layoutX="38.0" layoutY="117.0" />
-      <TextField layoutX="38.0" layoutY="174.0" />
-      <TextField layoutX="38.0" layoutY="234.0" />
-      <ComboBox layoutX="278.0" layoutY="114.0" prefWidth="150.0" promptText="ID motorísta " />
-      <TableView layoutX="278.0" layoutY="186.0" prefHeight="341.0" prefWidth="447.0">
+      <Button layoutX="100.0" layoutY="477.0" mnemonicParsing="false" onAction="#atualizarVeiculo" text="Atualizar" />
+      <TextField fx:id="txtPlaca" layoutX="38.0" layoutY="117.0" prefHeight="25.0" prefWidth="268.0" />
+      <TextField fx:id="txtModelo" layoutX="38.0" layoutY="174.0" prefHeight="25.0" prefWidth="268.0" />
+      <TextField fx:id="txtCor" layoutX="38.0" layoutY="234.0" prefHeight="25.0" prefWidth="111.0" />
+      <ComboBox fx:id="cbxIdMotorista" layoutX="162.0" layoutY="234.0" prefHeight="25.0" prefWidth="142.0" promptText="ID motorísta " />
+
+      <TableView fx:id="tblVeiculos" layoutX="332.0" layoutY="39.0" prefHeight="488.0" prefWidth="451.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="colIdV" prefWidth="37.0" text="ID" />
+          <TableColumn fx:id="colPlaca" prefWidth="69.0" text="Placa" />
+          <TableColumn fx:id="colModelo" prefWidth="143.0" text="Modelo" />
+          <TableColumn fx:id="colCor" prefWidth="83.0" text="Cor" />
+          <TableColumn fx:id="colMotorista" prefWidth="118.0" text="Motorista" />
         </columns>
       </TableView>
-      <TableView layoutX="278.0" layoutY="39.0" prefHeight="73.0" prefWidth="447.0">
+
+      <TableView fx:id="tblMotoristas" layoutX="38.0" layoutY="302.0" prefHeight="157.0" prefWidth="255.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="81.0" text="C2" />
+          <TableColumn fx:id="colId" prefWidth="55.0" text="ID" />
+          <TableColumn fx:id="colNome" prefWidth="100.0" text="Nome" />
+          <TableColumn fx:id="colMatricula" prefWidth="100.0" text="Matricula" />
         </columns>
+
       </TableView>
-      <Label layoutX="278.0" layoutY="18.0" text="Motorístas cadastrados" />
+      <Label layoutX="38.0" layoutY="281.0" text="Motorístas cadastrados" />
       <Label layoutX="38.0" layoutY="95.0" text="Placa" />
       <Label layoutX="38.0" layoutY="151.0" text="Modelo" />
       <Label layoutX="38.0" layoutY="211.0" text="Cor" />
-      <Label layoutX="278.0" layoutY="166.0" text="Veículos cadastrados" />
+      <Label layoutX="332.0" layoutY="18.0" text="Veículos cadastrados" />
    </children>
 </AnchorPane>

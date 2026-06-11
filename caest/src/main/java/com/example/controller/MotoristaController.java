@@ -43,9 +43,9 @@ private TableView<Motorista> tblMotoristas;
     @FXML
     private TableColumn<Motorista, String> colVinculo;
 
+//@@@botões e navegação@@@
 @FXML
 public void voltarHome(ActionEvent event) {
-    System.out.println("Botão Voltar clicado!");
     try {
         Parent root = FXMLLoader.load(
                 getClass().getResource("/view/HomeView.fxml"));
@@ -59,11 +59,10 @@ public void voltarHome(ActionEvent event) {
     } catch (IOException e) {
         e.printStackTrace();
     }
-    }
+}
 
 @FXML
 public void salvarMotorista(ActionEvent event){
-    System.out.println("Vínculo: " + cbxVinculo.getValue());
     Motorista motorista = new Motorista();
 
     motorista.setNome(txtNome.getText());
@@ -74,40 +73,6 @@ public void salvarMotorista(ActionEvent event){
     MotoristaDAO motoristaDAO = new MotoristaDAO();
     motoristaDAO.inserirMotorista(motorista);
     carregarTabela();
-}
-
-@FXML
-public void limparCampos(ActionEvent event){
-    txtNome.clear();
-    txtCpf.clear();
-    txtMatricula.clear();
-    cbxVinculo.getSelectionModel().clearSelection();
-}
-
-@FXML
-public void buscarMotorista(ActionEvent event){
-    String idText = txtNome.getText(); // Usando txtNome para entrada do ID
-    try {
-        int id = Integer.parseInt(idText);
-        MotoristaDAO dao = new MotoristaDAO();
-        dao.buscarMotoristaPorId(id);
-    } catch (NumberFormatException e) {
-        System.out.println("ID inválido. Por favor, insira um número inteiro.");
-    }
-}
-
-@FXML
-public void excluirMotorista(ActionEvent event){
-    try { if(motoristaSelecionado == null) {
-        System.out.println("Nenhum motorista selecionado para atualização.");       
-        return;
-    }
-        MotoristaDAO dao = new MotoristaDAO();
-        dao.deletarMotorista(motoristaSelecionado.getId());
-        carregarTabela();
-    } catch (NumberFormatException e) {
-        System.out.println("ID inválido. Por favor, insira um número inteiro.");
-    }
 }
 
 @FXML
@@ -126,6 +91,41 @@ public void atualizarMotorista(ActionEvent event){
         MotoristaDAO dao = new MotoristaDAO();
         dao.atualizarMotorista(motorista);
         carregarTabela();
+    } catch (NumberFormatException e) {
+        System.out.println("ID inválido. Por favor, insira um número inteiro.");
+    }
+}
+
+@FXML
+public void limparCampos(ActionEvent event){
+    txtNome.clear();
+    txtCpf.clear();
+    txtMatricula.clear();
+    cbxVinculo.getSelectionModel().clearSelection();
+}
+
+@FXML
+public void excluirMotorista(ActionEvent event){
+    try { if(motoristaSelecionado == null) {
+        System.out.println("Nenhum motorista selecionado para atualização.");       
+        return;
+    }
+        MotoristaDAO dao = new MotoristaDAO();
+        dao.deletarMotorista(motoristaSelecionado.getId());
+        carregarTabela();
+    } catch (NumberFormatException e) {
+        System.out.println("ID inválido. Por favor, insira um número inteiro.");
+    }
+}
+
+//funções de busca e carregamento
+@FXML
+public void buscarMotorista(ActionEvent event){
+    String idText = txtNome.getText(); // Usando txtNome para entrada do ID
+    try {
+        int id = Integer.parseInt(idText);
+        MotoristaDAO dao = new MotoristaDAO();
+        dao.buscarMotoristaPorId(id);
     } catch (NumberFormatException e) {
         System.out.println("ID inválido. Por favor, insira um número inteiro.");
     }

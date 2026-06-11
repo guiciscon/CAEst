@@ -49,4 +49,11 @@ public class Veiculo {
     public void setMotorista(Motorista motorista) {
         this.motorista = motorista;
     }
+
+    public String getNomeMotorista() {
+        if (motorista != null) {
+            return motorista.getNome();
+        }
+        return "";
+    }
 }

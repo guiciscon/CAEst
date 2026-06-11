@@ -13,7 +13,6 @@ import javafx.scene.Node;
 public class HomeController {
 @FXML
 public void abrirMotoristas(ActionEvent event) {
-    System.out.println("Botão Motorista clicado!");
     try {
         Parent root = FXMLLoader.load(
                 getClass().getResource("/view/MotoristaView.fxml"));
@@ -30,7 +29,6 @@ public void abrirMotoristas(ActionEvent event) {
     }
 
 public void abrirVeiculos(ActionEvent event) {
-    System.out.println("Botão Veículos clicado!");
     try {
         Parent root = FXMLLoader.load(
                 getClass().getResource("/view/VeiculoView.fxml"));
@@ -45,5 +43,19 @@ public void abrirVeiculos(ActionEvent event) {
         e.printStackTrace();
     }
     }
+
+public void abrirLiberacaoManual(ActionEvent event){
+    try{
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LiberacaoManualView.fxml"));
+
+        Stage stage = (Stage) ((Node) event.getSource())
+                .getScene()
+                .getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e){
+        e.printStackTrace();
+    }
+}
 }
 

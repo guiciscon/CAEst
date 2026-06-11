@@ -10,10 +10,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.MotoristaController">
    <children>
-      <Button fx:id="btnSalvar" layoutX="21.0" layoutY="389.0" mnemonicParsing="false" onAction="#salvarMotorista" text="Salvar" />
-      <Button fx:id="btnAtualizar" layoutX="89.0" layoutY="389.0" mnemonicParsing="false" onAction="#atualizarMotorista" text="Atualizar" />
-      <Button fx:id="btnLimpar" layoutX="196.0" layoutY="389.0" mnemonicParsing="false" onAction="#limparCampos" text="Limpar" />
-      <Button fx:id="btnExcluir" layoutX="277.0" layoutY="389.0" mnemonicParsing="false" onAction="#excluirMotorista" text="Excluir" />
+      <Button layoutX="21.0" layoutY="389.0" mnemonicParsing="false" onAction="#salvarMotorista" text="Salvar" />
+      <Button layoutX="89.0" layoutY="389.0" mnemonicParsing="false" onAction="#atualizarMotorista" text="Atualizar" />
+      <Button layoutX="196.0" layoutY="389.0" mnemonicParsing="false" onAction="#limparCampos" text="Limpar" />
+      <Button layoutX="277.0" layoutY="389.0" mnemonicParsing="false" onAction="#excluirMotorista" text="Excluir" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltarHome" text="Voltar" />
       <TextField fx:id="txtNome" layoutX="32.0" layoutY="85.0" prefHeight="25.0" prefWidth="295.0" />
       <TextField fx:id="txtCpf" layoutX="32.0" layoutY="151.0" prefHeight="25.0" prefWidth="150.0" />
@@ -21,9 +21,9 @@
       <ComboBox fx:id="cbxVinculo" layoutX="198.0" layoutY="207.0" prefHeight="25.0" prefWidth="131.0" promptText="Selecionar" />
       <TableView fx:id="tblMotoristas" layoutX="346.0" layoutY="49.0" prefHeight="415.0" prefWidth="401.0">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="colId" prefWidth="40.0" text="ID" />
           <TableColumn fx:id="colNome" prefWidth="125.0" text="Nome" />
-          <TableColumn fx:id="colCpf" prefWidth="75.0" text="CPF" />
+          <TableColumn fx:id="colCpf" prefWidth="85.0" text="CPF" />
           <TableColumn fx:id="colMatricula" prefWidth="75.0" text="Matrícula" />
           <TableColumn fx:id="colVinculo" prefWidth="75.0" text="Vínculo" />
         </columns>
