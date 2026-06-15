@@ -18,7 +18,11 @@ public class VeiculoDAO {
             stmt.setString(1, veiculo.getPlaca());
             stmt.setString(2, veiculo.getModelo());
             stmt.setString(3, veiculo.getCor());
-            stmt.setInt(4, veiculo.getMotorista().getId());
+            if (veiculo.getMotorista() != null) {
+                stmt.setInt(4, veiculo.getMotorista().getId());
+            } else {
+                stmt.setNull(4, java.sql.Types.INTEGER);
+            };
 
             stmt.executeUpdate();
 
@@ -44,14 +48,18 @@ public class VeiculoDAO {
     }
 
     public void atualizarVeiculo(Veiculo veiculo){
-        String sql = "UPDATE veiculo SET placa = ?, modelo = ?, cor = ?, motorista = ? WHERE id =?";
+        String sql = "UPDATE veiculo SET placa = ?, modelo = ?, cor = ?, idMotorista = ? WHERE id =?";
         try (Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {  
                 
             stmt.setString(1, veiculo.getPlaca());
             stmt.setString(2, veiculo.getModelo());
             stmt.setString(3, veiculo.getCor());
-            stmt.setInt(4, veiculo.getMotorista().getId());
+            if (veiculo.getMotorista() != null) {
+                stmt.setInt(4, veiculo.getMotorista().getId());
+            } else {
+                stmt.setNull(4, java.sql.Types.INTEGER);
+            }
             stmt.setInt(5, veiculo.getId());
 
             stmt.executeUpdate();
@@ -64,7 +72,7 @@ public class VeiculoDAO {
     }
 
     public List<Veiculo> listarVeiculos(){
-        String sql = "SELECT v.id, v.placa, v.modelo, v.cor, m.nome FROM veiculo v JOIN motorista m ON v.idMotorista = m.id";
+        String sql = "SELECT v.id, v.placa, v.modelo, v.cor, m.nome, m.id AS idMotorista FROM veiculo v LEFT JOIN motorista m ON v.idMotorista = m.id";
         List<Veiculo> veiculos = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -75,12 +83,22 @@ public class VeiculoDAO {
                 Veiculo veiculo = new Veiculo();
                 Motorista motorista = new Motorista();
 
+                if (rs.getObject("idMotorista") != null) {
+                motorista.setId(rs.getInt("idMotorista"));
                 motorista.setNome(rs.getString("nome"));
+                veiculo.setMotorista(motorista);}
+
                 veiculo.setId(rs.getInt("id"));
                 veiculo.setPlaca(rs.getString("placa"));
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setCor(rs.getString("cor"));
+                
+                if (rs.getObject("idMotorista") != null) {
+                motorista.setId(rs.getInt("idMotorista"));
+                motorista.setNome(rs.getString("nome"));
                 veiculo.setMotorista(motorista);
+            }
+
                 veiculos.add(veiculo);
             }
         } catch (SQLException e) {
@@ -89,8 +107,8 @@ public class VeiculoDAO {
         return veiculos;
     }
 
-    public void buscarVeiculoPorId(int id){
-        String sql = "SELECT v.id, v.placa, v.modelo, v.cor, m.nome FROM veiculo v JOIN motorista m ON v.idMotorista = m.id WHERE v.id = ?";
+    public Veiculo buscarVeiculoPorId(int id){
+        String sql = "SELECT v.id, v.placa, v.modelo, v.cor, m.id AS idMotorista, m.nome FROM veiculo v LEFT JOIN motorista m ON v.idMotorista = m.id  WHERE v.id = ?";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -98,17 +116,30 @@ public class VeiculoDAO {
             var rs = stmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id"));
-                System.out.println("Placa: " + rs.getString("placa"));
-                System.out.println("Modelo: " + rs.getString("modelo"));
-                System.out.println("Cor: " + rs.getString("cor"));
-                System.out.println("Motorista: " + rs.getString("nome"));
+                Veiculo veiculo = new Veiculo();
+                Motorista motorista = new Motorista();
+
+                veiculo.setId(rs.getInt("id"));
+                veiculo.setPlaca(rs.getString("placa"));
+                veiculo.setModelo(rs.getString("modelo"));
+                veiculo.setCor(rs.getString("cor"));
+                veiculo.setMotorista(motorista);
+
+                if (rs.getObject("idMotorista") != null) {
+
+                motorista.setId(rs.getInt("idMotorista"));
+                motorista.setNome(rs.getString("nome"));
+
+                veiculo.setMotorista(motorista);
+            }
+                return veiculo;
             } else {
                 System.out.println("Veículo não encontrado.");
             }
         } catch (SQLException e) {
             e.printStackTrace();    
         }
+        return null;
     }
 }
 

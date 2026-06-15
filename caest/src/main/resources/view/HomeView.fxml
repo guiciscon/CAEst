@@ -4,16 +4,22 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="323.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="323.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.HomeController">
    <children>
-      <Button layoutX="15.0" layoutY="188.0" mnemonicParsing="false" onAction="#abrirMotoristas" text="Motorista" textAlignment="JUSTIFY" />
-      <Button layoutX="113.0" layoutY="188.0" mnemonicParsing="false" onAction="#abrirVeiculos" text="Veículos" textAlignment="JUSTIFY" />
-      <Button layoutX="200.0" layoutY="188.0" mnemonicParsing="false" text="Liberação Manual" textAlignment="JUSTIFY" />
+      <Button layoutX="28.0" layoutY="209.0" mnemonicParsing="false" onAction="#abrirMotoristas" text="Motorista" textAlignment="JUSTIFY" />
+      <Button layoutX="28.0" layoutY="250.0" mnemonicParsing="false" onAction="#abrirVeiculos" prefHeight="25.0" prefWidth="68.0" text="Veículos" textAlignment="JUSTIFY" />
+      <Button layoutX="183.0" layoutY="209.0" mnemonicParsing="false" text="Liberação Manual" textAlignment="JUSTIFY" />
+     
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="62.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagens/CAEst_logo.png" />
          </image>
       </ImageView>
-   </children>
+
+      <Text layoutX="28.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR" style="-fx-font-weight: bold;" />
+      <Text layoutX="183.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBERAÇÃO" style="-fx-font-weight: bold;"/>
+  
+      </children>
 </AnchorPane>

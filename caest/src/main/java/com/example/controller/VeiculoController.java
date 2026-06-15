@@ -78,18 +78,19 @@ public void salvarVeiculo(ActionEvent event) {
         veiculo.setPlaca(txtPlaca.getText());
         veiculo.setModelo(txtModelo.getText());
         veiculo.setCor(txtCor.getText());
-        try {
-            int motoristaId = Integer.parseInt(cbxIdMotorista.getValue());
-            Motorista motorista = new Motorista();
-            motorista.setId(motoristaId);
-            veiculo.setMotorista(motorista);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
 
+        String valorMotorista = cbxIdMotorista.getValue();
+        if (valorMotorista != null && !valorMotorista.isEmpty()){
+            Motorista motorista = new Motorista();
+            motorista.setId(Integer.parseInt(valorMotorista));
+            veiculo.setMotorista(motorista);
+        } else {
+            veiculo.setMotorista(null);;
+        }
         VeiculoDAO veiculoDAO = new VeiculoDAO();
         veiculoDAO.inserirVeiculo(veiculo);
         carregarVeiculos();
+        limparCampos(null);
 }
 
 @FXML
@@ -103,11 +104,14 @@ public void atualizarVeiculo(ActionEvent event){
         veiculo.setPlaca(txtPlaca.getText());
         veiculo.setModelo(txtModelo.getText());
         veiculo.setCor(txtCor.getText());
-        int motoristaId = Integer.parseInt(cbxIdMotorista.getValue());
-        Motorista motorista = new Motorista();
-        motorista.setId(motoristaId);
-        veiculo.setMotorista(motorista);
-
+        String valorMotorista = cbxIdMotorista.getValue();
+        if (valorMotorista != null && !valorMotorista.isEmpty()){
+            Motorista motorista = new Motorista();
+            motorista.setId(Integer.parseInt(valorMotorista));
+            veiculo.setMotorista(motorista);
+        } else {
+            veiculo.setMotorista(null);
+        }
         VeiculoDAO dao = new VeiculoDAO();
         dao.atualizarVeiculo(veiculo);
         carregarVeiculos();
@@ -116,14 +120,20 @@ public void atualizarVeiculo(ActionEvent event){
     } catch (Exception e) {
         e.printStackTrace();
     }
+    limparCampos(null);
+    veiculoSelecionado = null;
 }
+
     
 @FXML
 public void limparCampos(ActionEvent event) {
         txtPlaca.clear();
         txtModelo.clear();
         txtCor.clear();
-        cbxIdMotorista.getSelectionModel().clearSelection();}
+        cbxIdMotorista.getSelectionModel().clearSelection();
+
+        veiculoSelecionado = null;
+}
 
 @FXML void excluirVeiculo(ActionEvent event){
         try { if(veiculoSelecionado == null){
@@ -138,10 +148,20 @@ public void limparCampos(ActionEvent event) {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        veiculoSelecionado = null;
+        limparCampos(null);
 }
 
 
 //funções de busca e carregamento
+@FXML
+public void buscarVeiculo(ActionEvent event){
+    if(veiculoSelecionado == null){
+        System.out.println("Nenhum veículo selecionado para busca.");
+        return;
+    }
+}
+
 @FXML
 private void carregarVeiculos() {
     VeiculoDAO veiculoDAO = new VeiculoDAO();
@@ -165,7 +185,8 @@ private void carregarMotoristas() {
 }
 
 @FXML
-public void initialize(){
+public void initialize() {
+
     colId.setCellValueFactory(new PropertyValueFactory<>("id"));
     colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     colMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
@@ -175,15 +196,38 @@ public void initialize(){
     colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
     colCor.setCellValueFactory(new PropertyValueFactory<>("cor"));
     colMotorista.setCellValueFactory(new PropertyValueFactory<>("nomeMotorista"));
-        carregarMotoristas();
-        carregarVeiculos();
 
-        MotoristaDAO motoristaDAO = new MotoristaDAO();
-        
-        for (Motorista motorista : motoristaDAO.listarMotoristas()){
-            cbxIdMotorista.getItems().add(String.valueOf(motorista.getId()));
+    carregarMotoristas();
+    carregarVeiculos();
+
+    MotoristaDAO motoristaDAO = new MotoristaDAO();
+
+    for (Motorista motorista : motoristaDAO.listarMotoristas()) {
+        cbxIdMotorista.getItems().add(
+            String.valueOf(motorista.getId())
+        );
+    }
+
+    tblVeiculos.getSelectionModel().selectedItemProperty().addListener(
+        (obs, oldSelection, newSelection) -> {
+
+            if (newSelection != null) {
+                veiculoSelecionado = newSelection;
+
+                txtPlaca.setText(newSelection.getPlaca());
+                txtModelo.setText(newSelection.getModelo());
+                txtCor.setText(newSelection.getCor());
+
+                if (newSelection.getMotorista() != null) {
+                cbxIdMotorista.setValue(
+                    String.valueOf(newSelection.getMotorista().getId())
+                );
+                    } else {
+                        cbxIdMotorista.getSelectionModel().clearSelection();
+                    }
+            }
         }
+    );
 }
-
 }
 
