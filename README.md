@@ -14,7 +14,7 @@ CREATE TABLE Veiculo(
     placa CHAR(7) NOT NULL UNIQUE,
     modelo VARCHAR(45) NOT NULL,
     cor VARCHAR(45),
-    idMotorista INT NOT NULL,
+    idMotorista INT,
     FOREIGN KEY (idMotorista) REFERENCES Motorista(id));
     
 CREATE TABLE LiberacaoManual(
