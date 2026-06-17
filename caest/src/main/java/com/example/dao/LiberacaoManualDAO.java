@@ -15,7 +15,7 @@ public class LiberacaoManualDAO {
 
             stmt.setString(1, liberacao.getDocMotorista());
             stmt.setString(2, liberacao.getMotivo());
-            //stmt.setDate(parameterIndex, x);(3, liberacao.getDataHora());
+            stmt.setObject(3, liberacao.getDataHora());
             stmt.setInt(4, liberacao.getVeiculo().getId());
             stmt.executeUpdate();
 
