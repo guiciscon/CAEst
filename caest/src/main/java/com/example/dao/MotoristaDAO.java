@@ -37,8 +37,8 @@ public class MotoristaDAO {
 
             System.out.println("Motorista deletado com sucesso!");
         } catch (SQLException e) {
-            e.printStackTrace();
-        }   
+            throw new RuntimeException(e);
+        }  
     }
 
     public void atualizarMotorista(Motorista motorista){

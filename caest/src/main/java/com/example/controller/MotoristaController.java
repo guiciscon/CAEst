@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Alert;
 
 public class MotoristaController {
 private Motorista motoristaSelecionado;
@@ -113,9 +114,16 @@ public void excluirMotorista(ActionEvent event){
         MotoristaDAO dao = new MotoristaDAO();
         dao.deletarMotorista(motoristaSelecionado.getId());
         carregarTabela();
-    } catch (NumberFormatException e) {
-        System.out.println("ID inválido. Por favor, insira um número inteiro.");
-    }
+    } catch (Exception e) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle("Erro");
+        alert.setHeaderText("Não foi possível excluir o motorista");
+        alert.setContentText("Este motorista possui veículos vinculados.");
+
+        alert.showAndWait();
+        }
 }
 
 //funções de busca e carregamento

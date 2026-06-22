@@ -10,6 +10,8 @@ import com.example.model.Motorista;
 import com.example.model.Veiculo;
 import com.example.util.ConnectionFactory;
 
+import javafx.scene.control.Alert;
+
 public class VeiculoDAO {
    public int inserirVeiculo(Veiculo veiculo){
         String sql = "INSERT INTO veiculo (placa, modelo, cor, idMotorista) VALUES (?, ?, ?, ?)";
@@ -53,9 +55,16 @@ public class VeiculoDAO {
             stmt.executeUpdate();
 
             System.out.println("Veículo deletado com sucesso!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }   
+        } catch (Exception e) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle("Erro");
+        alert.setHeaderText("Não foi possível excluir o veículo");
+        alert.setContentText("Este veículo está vinculado a uma liberação manual.");
+
+        alert.showAndWait();
+        }
     }
 
     public void atualizarVeiculo(Veiculo veiculo){

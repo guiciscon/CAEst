@@ -11,7 +11,7 @@ public class ConnectionFactory {
 
     private static final String USER = "root";
 
-    private static final String PASSWORD = "ifsp";
+    private static final String PASSWORD = "0133";
 
     public static Connection getConnection()
             throws SQLException {

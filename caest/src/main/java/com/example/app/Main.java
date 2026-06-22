@@ -1,12 +1,13 @@
 package com.example.app;
 
-import com.example.model.Motorista;
+/*import com.example.model.Motorista;
 import com.example.dao.MotoristaDAO;
 import com.example.dao.VeiculoDAO;
-import com.example.model.Veiculo;
+import com.example.model.Veiculo;*/
 
 public class Main {
     public static void main(String[] args) {
+        /*
         Motorista motorista = new Motorista();
         //motorista.setId(6);
         motorista.setNome("Gabriel");
@@ -32,6 +33,8 @@ public class Main {
         //veiculoDAO.deletarVeiculo(1);
         //veiculoDAO.atualizarVeiculo(veiculo);
         veiculoDAO.listarVeiculos();
-        
+        */
+
+        System.out.println("Aplicação iniciada com sucesso!");
     }
 }

@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.example.app.App",
+            "projectName": "caest"
+        },
+        {
+            "name": "Launch C++",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "C:\\Users\\luisa\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Scene Builder",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true
+        }
+    ]
+}
