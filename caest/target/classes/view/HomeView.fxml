@@ -18,8 +18,8 @@
          </image>
       </ImageView>
 
-      <Text layoutX="28.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR" style="-fx-font-weight: bold;" />
-      <Text layoutX="183.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBERAÇÃO" style="-fx-font-weight: bold;"/>
+      <Text layoutX="28.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="CADASTRAR" />
+      <Text layoutX="183.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="LIBERAÇÃO" />
   
       </children>
 </AnchorPane>

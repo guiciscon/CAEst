@@ -3,17 +3,20 @@ package com.example.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ArrayList;
-import com.example.model.Veiculo;
+import java.util.List;
+
 import com.example.model.Motorista;
+import com.example.model.Veiculo;
 import com.example.util.ConnectionFactory;
 
 public class VeiculoDAO {
-   public void inserirVeiculo(Veiculo veiculo){
+   public int inserirVeiculo(Veiculo veiculo){
         String sql = "INSERT INTO veiculo (placa, modelo, cor, idMotorista) VALUES (?, ?, ?, ?)";
+        
+        // Adicionamos o PreparedStatement.RETURN_GENERATED_KEYS aqui:
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, veiculo.getPlaca());
             stmt.setString(2, veiculo.getModelo());
@@ -26,10 +29,18 @@ public class VeiculoDAO {
 
             stmt.executeUpdate();
 
-            System.out.println("Veículo inserido com sucesso!");
+            // Pega o ID que o MySQL gerou e retorna ele
+            try (java.sql.ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int idGerado = generatedKeys.getInt(1);
+                    System.out.println("Veículo inserido com sucesso! ID gerado: " + idGerado);
+                    return idGerado;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -1; // Retorna -1 caso dê algum erro
     }
 
     public void deletarVeiculo(int id){

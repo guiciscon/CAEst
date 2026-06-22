@@ -8,5 +8,6 @@ com\example\controller\HomeController.class
 com\example\dao\LiberacaoManualDAO.class
 com\example\controller\MotoristaController.class
 com\example\controller\VeiculoController.class
+com\example\controller\LiberacaoManualController.class
 com\example\model\LiberacaoManual.class
 com\example\app\App.class
