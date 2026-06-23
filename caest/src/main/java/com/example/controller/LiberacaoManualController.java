@@ -30,16 +30,20 @@ public class LiberacaoManualController {
     @FXML
     private TextField txtCor;
 
+    // --- NOMES ATUALIZADOS AQUI ---
     @FXML
-    private TextField txtPlaca1; // Documento
+    private TextField txtDocumento; 
 
     @FXML
-    private TextField txtPlaca11; // Motivo
+    private TextField txtMotivo; 
+
+    @FXML
+    private AnchorPane paneMotorista; 
 
     // Variável para guardar o veículo entre um clique e outro
     private Veiculo veiculoSalvo = null;
 
-    // --- AÇÃO 1: SALVAR SÓ O VEÍCULO ---
+    // --- SALVAR SÓ O VEÍCULO ---
     @FXML
     public void confirmarVeiculo(ActionEvent event) {
         Veiculo veiculo = new Veiculo();
@@ -58,7 +62,7 @@ public class LiberacaoManualController {
             Alert aviso = new Alert(Alert.AlertType.INFORMATION);
             aviso.setTitle("Sucesso");
             aviso.setHeaderText(null);
-            aviso.setContentText("Veículo inserido com sucesso! Agora, preencha os dados do motorista.");
+            aviso.setContentText("Veículo inserido com sucesso! Preencha os dados do motorista.");
             aviso.showAndWait();
 
             // Mostra os campos do motorista
@@ -68,57 +72,60 @@ public class LiberacaoManualController {
             txtPlaca.setDisable(true);
             txtModelo.setDisable(true);
             txtCor.setDisable(true);
-        }else {
+        } else {
             System.out.println("Erro ao salvar o veículo.");
         }
     }
 
-    // --- AÇÃO 2: SALVAR A LIBERAÇÃO ---
+    // --- SALVAR A LIBERAÇÃO ---
     @FXML
     public void realizarLiberacao(ActionEvent event) {
         if (this.veiculoSalvo == null) {
-            System.out.println("ERRO: Você precisa confirmar o veículo primeiro!");
+            System.out.println("ERRO: Voce precisa confirmar o veiculo primeiro!");
             return; 
         }
 
         LiberacaoManual liberacao = new LiberacaoManual();
-        liberacao.setDocMotorista(txtPlaca1.getText());
-        liberacao.setMotivo(txtPlaca11.getText());
+        
+        // Puxando os dados dos campos com os nomes novos
+        liberacao.setDocMotorista(txtDocumento.getText());
+        liberacao.setMotivo(txtMotivo.getText());
+        
         liberacao.setDataHora(LocalDateTime.now());
         liberacao.setVeiculo(this.veiculoSalvo); 
 
         LiberacaoManualDAO liberacaoDAO = new LiberacaoManualDAO();
         liberacaoDAO.inserirLiberacaoManual(liberacao);
 
-        System.out.println("2/2 - Liberação manual registrada com sucesso!");
+        System.out.println("Liberação manual registrada com sucesso!");
         limparCampos(null); 
     }
 
-    // --- AÇÃO 3: LIMPAR TUDO ---
+    // --- LIMPAR TUDO ---
     @FXML
     public void limparCampos(ActionEvent event) {
         // Limpa os textos digitados
         txtPlaca.clear();
         txtModelo.clear();
         txtCor.clear();
-        txtPlaca1.clear(); 
-        txtPlaca11.clear();
+        txtDocumento.clear(); // Limpando com o nome novo
+        txtMotivo.clear();    // Limpando com o nome novo
         
-        // Destrava os campos do veículo para um novo cadastro
+        // Destrava os campos do veiculo para um novo cadastro
         txtPlaca.setDisable(false);
         txtModelo.setDisable(false);
         txtCor.setDisable(false);
         
-        // Esconde a parte do motorista novamente
+        // Esconde os campos de motorista novamente
         if (paneMotorista != null) {
             paneMotorista.setVisible(false);
         }
         
-        // Limpa o veículo da memória
+        // Limpar o veiculo da memoria
         this.veiculoSalvo = null; 
     }
 
-    // --- AÇÃO 4: VOLTAR ---
+    // --- VOLTAR ---
     @FXML
     public void voltarHome(ActionEvent event) {
         try {
@@ -130,7 +137,4 @@ public class LiberacaoManualController {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    private AnchorPane paneMotorista; // <-- Adicione essa linha junto das declarações @FXML
 }
