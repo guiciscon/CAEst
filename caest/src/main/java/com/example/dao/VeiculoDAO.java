@@ -31,7 +31,7 @@ public class VeiculoDAO {
 
             stmt.executeUpdate();
 
-            // Pega o ID que o MySQL gerou e retorna ele
+            //Pega o ID que o MySQL gerou e retorna ele
             try (java.sql.ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int idGerado = generatedKeys.getInt(1);
@@ -42,7 +42,7 @@ public class VeiculoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1; // Retorna -1 caso dê algum erro
+        return -1; //retorna -1 caso dê algum erro
     }
 
     public void deletarVeiculo(int id){
@@ -54,7 +54,7 @@ public class VeiculoDAO {
 
             stmt.executeUpdate();
 
-            System.out.println("Veículo deletado com sucesso!");
+            System.out.println("Veiculo deletado com sucesso!");
         } catch (Exception e) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);

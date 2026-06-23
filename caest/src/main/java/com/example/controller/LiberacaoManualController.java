@@ -39,10 +39,10 @@ public class LiberacaoManualController {
     @FXML
     private AnchorPane paneMotorista; 
 
-    // Variável para guardar o veículo entre um clique e outro
+    //variável para guardar o veículo entre um clique e outro
     private Veiculo veiculoSalvo = null;
 
-    // --- SALVAR SÓ O VEÍCULO ---
+    //SALVAR SÓ O VEÍCULO
     @FXML
     public void confirmarVeiculo(ActionEvent event) {
         Veiculo veiculo = new Veiculo();
@@ -57,7 +57,7 @@ public class LiberacaoManualController {
             veiculo.setId(idGerado);
             this.veiculoSalvo = veiculo; 
             
-            // Pop-up de Sucesso!
+            // Pop-up de Sucesso
             Alert aviso = new Alert(Alert.AlertType.INFORMATION);
             aviso.setTitle("Sucesso");
             aviso.setHeaderText(null);
@@ -76,7 +76,7 @@ public class LiberacaoManualController {
         }
     }
 
-    // --- SALVAR A LIBERAÇÃO ---
+    //SALVAR A LIBERAÇÃO
     @FXML
     public void realizarLiberacao(ActionEvent event) {
         if (this.veiculoSalvo == null) {
@@ -97,7 +97,7 @@ public class LiberacaoManualController {
         limparCampos(null); 
     }
 
-    // --- LIMPAR TUDO ---
+    //LIMPAR TUDO
     @FXML
     public void limparCampos(ActionEvent event) {
         // limpa os textos digitados
