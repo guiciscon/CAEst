@@ -30,12 +30,11 @@ public class LiberacaoManualController {
     @FXML
     private TextField txtCor;
 
-    // --- NOMES ATUALIZADOS AQUI ---
     @FXML
-    private TextField txtDocumento; 
+    private TextField txtPlaca1; // Documento
 
     @FXML
-    private TextField txtMotivo; 
+    private TextField txtPlaca11; // Motivo
 
     @FXML
     private AnchorPane paneMotorista; 
@@ -86,11 +85,8 @@ public class LiberacaoManualController {
         }
 
         LiberacaoManual liberacao = new LiberacaoManual();
-        
-        // Puxando os dados dos campos com os nomes novos
-        liberacao.setDocMotorista(txtDocumento.getText());
-        liberacao.setMotivo(txtMotivo.getText());
-        
+        liberacao.setDocMotorista(txtPlaca1.getText());
+        liberacao.setMotivo(txtPlaca11.getText());
         liberacao.setDataHora(LocalDateTime.now());
         liberacao.setVeiculo(this.veiculoSalvo); 
 
@@ -104,24 +100,24 @@ public class LiberacaoManualController {
     // --- LIMPAR TUDO ---
     @FXML
     public void limparCampos(ActionEvent event) {
-        // Limpa os textos digitados
+        // limpa os textos digitados
         txtPlaca.clear();
         txtModelo.clear();
         txtCor.clear();
-        txtDocumento.clear(); // Limpando com o nome novo
-        txtMotivo.clear();    // Limpando com o nome novo
+        txtPlaca1.clear(); 
+        txtPlaca11.clear();
         
-        // Destrava os campos do veiculo para um novo cadastro
+        // destrava os campos do veculo para um novo cadastro
         txtPlaca.setDisable(false);
         txtModelo.setDisable(false);
         txtCor.setDisable(false);
         
-        // Esconde os campos de motorista novamente
+        // esconde os campos de motorista novamente
         if (paneMotorista != null) {
             paneMotorista.setVisible(false);
         }
         
-        // Limpar o veiculo da memoria
+        // Limpar o veiculo da memria
         this.veiculoSalvo = null; 
     }
 
